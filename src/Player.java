@@ -62,11 +62,11 @@ public class Player {
     }
   	
   	//inner class
-	public class PlayerCell extends Cell implements CanEat {
+	public class PlayerCell extends HungryCell {
 		
 	  	public PlayerCell(double x, double y, int mass) {
-	      	this.x = x;
-	      	this.y = y;
+	      	setX(x);
+	      	setY(y);
 	      	setMass(mass);
 	      	//create cell body
 	      	node = new Circle(x, y, radian, getColor());
@@ -87,43 +87,14 @@ public class Player {
 	  	public void delete() {
 
 	  	}
-	  
+	  	@override
 	  	public void eat(Cell cell) {
-	      	
-	    }
-	  
-	  	public boolean canEat(Cell cell) {
-	      	if (getMass() > Math.round(cell.getMass() * 1.1)) {
-	          	double distance = Math.sqrt(Math.abs(getX()-cell.getX()) + Math.abs(getY()-cell.getY()));
-	          	if (distance < cell.getRadian()) {
-	              	return true;
-	            }
-	        }
-	      	return false;
+			mass += cell.getMass();
 	    }
 	  	
 	  	//getters & setters
-	  	public int getMass() {
-	      	return mass;
-	    }
-	    public void setMass(int mass) {
-	    	this.mass = mass;
-	    	this.radian = Math.sqrt(100 * mass);
-	    }
-		public double getRadian() {
-	      	return radian;
-	    }
-		public double getX() {
-	      	return x;
-	    }
-		public double getY() {
-	      	return y;
-	    }
 	  	public String getName() {
 	    	return name;
-	    }
-	  	public Node getNode() {
-	      	return node;
 	    }
 	}
 }
